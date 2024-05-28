@@ -1,11 +1,16 @@
 package com.nota.model;
 
 import java.util.Date;
+import java.util.List;
 
+import com.nota.model.Endereco;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class cliente {
@@ -17,6 +22,12 @@ public class cliente {
     private String cpf;
     private String sexo;
     private Date dataNascimento;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Endereco endereco;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<FotoPerfil> fotosPerfil;
     
     public Long getId() {
         return id;
@@ -48,7 +59,21 @@ public class cliente {
     }
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+    public Endereco getEndereco() {
+        return endereco;
+    }
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     } 
+    public List<FotoPerfil> getFotosPerfil() {
+        return fotosPerfil;
+    }
+
+    public void setFotosPerfil(List<FotoPerfil> fotosPerfil) {
+        this.fotosPerfil = fotosPerfil;
+    }
+
 
 
 }
